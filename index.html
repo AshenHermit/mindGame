@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mind Game</title>
+	<meta charset = "utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no">
+	<link rel="icon" href="ico.png" type="image/png">
+	<link rel= "stylesheet" href="colorpicker.css"/>
+	<link rel= "stylesheet" href="css.css"/>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="rot.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+	<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+	<div style="position: absolute;">
+		<a target="_blank" href="https://qiwi.com/payment/form/99?extra[%27account%27]=79175518112"><button style="">donate<br><span style="font-size: 0.7em;">and</span><br>advise</button></a>
+		<button onclick="toggleHelp();" style="">help</button>
+		<button onclick="setMainColor(this);" style="background-color: #f4ac5f;"></button>
+		<button onclick="setMainColor(this);" style="background-color: #5fbbf4;"></button>
+		<button onclick="setMainColor(this);" style="background-color: #f45f5f;"></button>
+		<button onclick="setMainColor(this);" style="background-color: #c2e288;"></button>
+	</div>
+
+	<div class="centerContainer">
+		<div class="chat-container">
+			<div id="chat" class="chat">
+				<div class="printingText"></div>
+			</div>
+			<div class="sendForm">
+				<input id="chatInput" oninput="inputPrint(this);" placeholder="message" type="text" name="">
+				<button data-send-to="chat" id="send" onclick="onSend(this);">send</button>
+			</div>
+		</div>
+		<div id="cards" class="cards-container"></div>
+	</div>
+
+	<div class="saveButton">
+		<div class="map-select">
+		</div>
+		<canvas id="map"></canvas>
+		<div id="color-picker"></div>
+		<button style="width: -webkit-fill-available;font-size: 1.2em;" onclick="saveMaps();">save maps</button>
+		<div style="width: -webkit-fill-available; padding: 8px;"></div>
+		<button style="width: -webkit-fill-available;font-size: 1.2em;" onclick="savePersons();">SAVE</button>
+		<div style="width: -webkit-fill-available; padding: 8px;"></div>
+		<div class="editorLine"><span class="editor-label">random min: </span><input id="rand-min" class="editor-input" placeholder type="number" name="" value="0"></div>
+		<div class="editorLine"><span class="editor-label">random max: </span><input id="rand-max" class="editor-input" placeholder type="number" name="" value="100"></div>
+		<button style="width: -webkit-fill-available; padding: 4px; font-size: 1.2em" onclick="setButtonRandom(this);">random value</button>
+		<!-- <label class="check-container">  
+			set random as pseudo
+			<input id="setRandomAsPseudo" type="checkbox" checked="checked">
+			<span class="checkmark"></span>
+		</label> -->
+		<div style="width: -webkit-fill-available; padding: 8px;"></div>
+		<div class="editorLine"><span class="editor-label">prop name for count: </span><input style="padding: 4px;" id="math-prop-name" class="editor-input"placeholder type="text" name="" value="prop"></div>
+		<div class="editorLine"><span class="editor-label">pseudo-prop</span><input style="padding: 4px;" id="pseudo-prop" class="editor-input" placeholder type="text" name="" value="50"></div>
+	</div>
+	<textarea spellcheck="false" class="bookmarks">заметочки</textarea>
+	<div id="prompt" class="prompt"></div>
+	<div id="context-menu">
+		<button class="addProp" onclick="">mute in chat</button>
+	</div>
+	<a target="_blank" href="https://vk.com/blacktigeroff"><div style="position: absolute;right: 0;bottom: 0;margin: 0.4%;color: rgba(244, 172, 95, 0.61);font-weight: 900;">by EVOIL</div></a>
+
+	<div style="z-index: -1;display: none;" class="help-container fade-out">
+		<div class="help">
+			<h1 style="color: var(--main-color);">Help</h1>
+			<span style="color: var(--main-color);">Советую масштаб страницы уменьшить.</span>
+			<br>
+			<br>
+			в общем:
+			<ul>
+				<li>Подключение к серверу происходит автоматически.</li>
+				<li>Выйти можно просто закрыв вкладку, при этом все изменения будут сохранены пока сервер не закроют.<br>В случае необходимости возвращения в игру попроси админа сервера загрузить твои прошлые данные.</li>
+				<li>Первый вошедший автоматически становится админом.</li>
+				<li>Настроечки для рандома, находятся под холстом карты.</li>
+			</ul>
+			<br>
+			изменение профиля:
+			<ul>
+				<li>Твой ник на карточке подсвечен акцентным цветом.</li>
+				<li>При клике на аватар/ник/класс, можно сделать изменения.</li>
+				<li>Какую аву поставить? Достаточно просто скопировать контекстным меню (пкм) url изображения вашей аватарки из любого диалога вк.</li>
+			</ul>
+			<br>
+			чат:
+			<ul>
+				<li>Сообщения бога подсвечены акцентным цветом.</li>
+				<li>Чтобы вставить картинку, достаточно ввести ее прямой url в строку сообщения и отправить.<br>поддерживаются форматы: .png .jpg .gif</li>
+			</ul>
+			<br>
+			для бога:
+			<ul>
+				<li>Контекстное меню можно открыть при клике правой конпкой мыши на верхнюю часть карточкм игрока или на любой из параметров игрока.</li>
+				<li>Мьютить и менять профиль игрока можно в крнтекстном меню карточки игрока</li>
+				<li>Добавлять параметры можно кликом на "add property" внизу карточки.</li>
+				<li>Удалять параметры можно кликом на красную полосу справа параметра.</li>
+				<li>Для 
+				быстрого изменения значения можно проcто нажать на полосу параметра.</li>
+				<li>Настроечки для контекстного меню и рандома, находятся под кнопкой SAVE.</li>
+				<li>Для подсчета процента от значения какого либо параметра, нужно после значения задающего процент поставить "%" и в контекстном меню выбрать "set for count"<br>Так можно прибавлять, вычитать и приравнивать</li>
+				<li>Чтобы для подсчета взять значение псевдо параметра, в поле "prop name for count" вместо имени введи "#" или "№"</li>
+				<li>Исходя их предыдущего пункта, "#" и "№" в названии параметра лучше не писать.</li>
+				<li style="color: var(--main-color);">Для того чтобы изменения увидели другие игроки, после каждого редактирования следует нажимать SAVE.<br></li>
+
+				редактор карты:
+				<ul>
+					<li>"+" cверху - добавлять карты</li>		
+					<li>ЛКМ по холсту карты - кисть</li>
+					<li>СКМ по холсту карты - пипетка</li>
+					<li>ПКМ по холсту карты - ластик</li>
+					<li>снизу холста есть полоса цвета, при клике на которую можно </li>
+					<li style="color: var(--main-color);">Для того чтобы измененные карты увидели другие игроки, после каждого редактирования следует нажимать save maps.</li>
+
+
+				</ul>
+			</ul>
+		</div>
+		<img class="help-close" onclick="toggleHelp();" src="https://www.ducotedesolivades.com/wp-content/themes/olivades/images/close-512.png">
+	</div>
+
+	<script type="text/javascript" src="colorpicker.js"></script>
+	<script type="text/javascript" src="js.js"></script>
+	<script type="text/javascript" src="map.js"></script>
+</body>
+</html>

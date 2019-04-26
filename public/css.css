@@ -1,0 +1,548 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height: 3px;
+}
+::-webkit-scrollbar-button {
+    background-color: #1a1d26;
+}
+::-webkit-scrollbar-track {
+    background-color: #1a1d26;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #1a1d26;
+}
+::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: var(--main-color);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-corner {
+    background-color: #1a1d26;
+}
+}
+::-webkit-resizer {
+    background-color: #1a1d26;
+}
+
+:root {
+  --main-color: #f4ac5f;
+}
+
+
+
+body {
+    padding: 6px;
+    margin: 0;
+    font-family: 'Comfortaa', cursive;
+    background-color: #1a1d26;
+    color: #fff;
+    scrollbar-width: thin;
+    scrollbar-color: var(--main-color) #1a1d26;
+}
+
+.centerContainer{
+    
+display: grid;
+    
+height: -webkit-fill-available;
+    
+height: -moz-available;
+    
+height: fill-available;
+    
+grid-template-rows: -1fr -1fr;
+    
+grid-auto-rows: minmax(50%,auto);
+    
+/* grid-template-rows: repeat(auto-fill, minmax(1px, 1fr)); */
+}
+
+/*input form*/
+button {
+    transition: background-color 0.06s, transform 0.06s;
+    transition-timing-function: ease;
+    position: relative;
+    user-select: none;
+    background-color: #2c313c;
+    color: var(--main-color);
+    font-family: 'Comfortaa', cursive;
+    padding: 12px;
+    border: 0;
+    border-bottom: 2px rgba(255, 255, 255, 0.3) solid;
+    font-weight: 800;
+    text-shadow: 0 0 9px #000;
+    cursor: pointer;
+}
+button:focus {
+    outline: none;
+}
+button:active {
+    background-color: #232833;
+    transform: scale(0.95);
+}
+button::after{
+    transition: width 0.1s, margin-left 0.1s;
+    transition-timing-function: ease;
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    border-bottom: 2px var(--main-color) solid;
+    left: 0em;
+    top: 0em;
+    margin-left: 50%;
+}
+button:hover::after{
+    width: 100%;
+    margin-left: 0%;
+}
+.addProp{
+    padding: 4px;
+    width: 100%;
+}
+
+input, *[contenteditable="true"] {
+    transition: border-color 0.2s, background-color 0.2s;
+    transition-timing-function: ease;
+    padding: 12px;
+    color: var(--main-color);
+    font-family: 'Comfortaa', cursive;
+    background-color: #2c313c;
+    border: 0px;
+    border-bottom: 2px rgba(255, 255, 255, 0.3) solid;
+}
+input:disabled {
+    background-color: #1a1d26;
+}
+input:focus, *[contenteditable="true"]:focus {
+    outline: none;
+    border-bottom: 2px var(--main-color) solid;
+}
+
+/*chat*/
+.chat-container {
+    width: 60%;
+    margin-left: 20%;
+    display: grid;
+    grid-template-rows: 20fr 1fr;
+}
+.chat {
+    padding: 0.2%;
+    background-color: #2c313c;
+    margin-bottom: 4px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+.chat-message {
+    margin: 5px;
+    margin-bottom: 15px;
+    animation-name: fade-in-right;
+    animation-duration: 0.3s;
+}
+span.message-name {}
+img.message-avatar {
+    width: 25px;
+    height: 25px;
+    border: 3px #ffffff00 solid;
+    user-select: none;
+    border-radius: 100%;
+    box-shadow: 0 0 13px rgba(0, 0, 0, 0.81);
+    margin-right: 10px;
+}
+span.mesTxt {
+    position: relative;
+    top: -12px;
+    word-break: break-all;
+}
+.message-image{
+    max-height: 128px;
+    border-radius: 4px;
+    border: 4px rgba(255,255,255,0.1) solid;
+}
+.sendForm{
+    display: grid;
+    grid-template-columns: 19fr 1fr;
+    grid-column-gap: 4px;
+}
+
+/*person cards*/
+.cards-container {
+    margin-top: 10px;
+    width: 60%;
+    margin-left: 20%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(0px, 1fr) );
+    grid-column-gap: 4px;
+    grid-auto-rows: minmax(100%,auto);
+}
+.card {
+    transition: width 0.2s;
+    transition-timing-function: ease;
+    padding: 10px;
+    background-color: #2c313c;
+    text-align: center;
+    animation-name: scale-fade-in-up;
+    animation-duration: 0.5s;
+    max-height: 100%;
+}
+.card-avatar{
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 4px;
+    border: 4px rgba(255,255,255,0.1) solid;
+}
+.card-content {
+    overflow-y: auto;
+    max-height: 85%;
+}
+.card-content-line {
+    transition: background-color 0.1s;
+    transition-timing-function: ease;
+    margin: 4px;
+    background-color: #252a35;
+    padding: 10px;
+    color: #7f8592;
+    text-align: left;
+    animation-name: scale-fade-in-up;
+    animation-duration: 0.2s;
+}
+*[contenteditable="true"]{
+    padding: 10px !important;
+    background-color: #252a35 !important;
+    display: inline-block;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+span.race{
+    color: #595d67;
+    font-size: 0.8em;
+    position: relative;
+    font-weight: 900;
+    top: -22px;
+}
+.prop{
+    
+}
+.card-line-value {
+    float: right;
+    color: var(--main-color);
+    text-shadow: 0 0 16px #000;
+    font-weight: 700;
+}
+.card-name {
+    font-size: 1.3em;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0 0 20px #000;
+}
+.saveButton{
+    width: 20%;
+    position: fixed;
+    left: 0;
+    top: 8%;
+    padding:0;
+    animation-name: fade-in-right;
+    animation-duration: 0.3s;
+}
+.deleteLine{
+    float: right;
+    margin-right: -9px;
+    position: relative;
+    width: 6px;
+    top: -10px;
+    height: 40px;
+    left: 0;
+    background-color: #ff6464;   
+    cursor: pointer;
+}
+.bookmarks{
+    outline: none;
+    padding: 12px;
+    font-family: 'Comfortaa', cursive;
+    background-color: #2c313c;
+    border: 0px;
+    padding: 12px;
+    background-color: #252a35;
+    position: fixed;
+    right: 0;
+    margin: 2%;
+    top: 0;
+    width: 15%;
+    overflow-y: auto;
+    height: 90%;
+    color: #878b98;
+    font-weight: 800;
+    font-size: 0.8em;
+    resize: none;
+}
+
+.prompt{
+
+}
+.printingText{
+    margin: 0;
+    width: 59%;
+    position: fixed;
+    text-align: right;
+    bottom: 55%;
+    color: rgba(255,255,255,0.4);
+    animation: blink 0.7s infinite;
+}
+#context-menu{
+    transition: top 0.07s, left 0.07s, opacity 0.1s;
+    transition-timing-function: ease;
+    position: absolute;
+    background-color: #2c313c;
+    padding: 1%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.73);
+    text-align: left;
+    opacity: 0.7;
+}
+.editorLine{
+    padding: 6px;
+    display: flex;
+}
+.editor-label{
+    margin-top: 2%;
+    width: 31%;
+    color: rgba(255, 255, 255, 0.71);
+}
+.editor-input{
+    width: -webkit-fill-available;
+    margin-left: 2%;
+    min-width: 0;
+}
+.help-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    padding: 5%;
+    background-color: rgba(0, 0, 0, 0.73);
+    animation-name: fade-in;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+.fade-out{
+    animation-name: fade-out;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+.help{
+    text-align: left;
+    text-shadow: 0 0 16px #000;
+    font-weight: 900;
+    overflow-y: auto;
+    height: -webkit-fill-available;
+}
+.help-close{
+    position: absolute;
+    filter: brightness(100);
+    opacity: 0.3;
+    width: 112px;
+    cursor: pointer;
+    left: 4%;
+    top: 0;
+}
+li{
+    margin-bottom: 6px;
+    color: rgba(144, 144, 144, 0.87);
+}
+
+div:focus{
+    outline: none;
+}
+::selection {
+    background-color: var(--main-color);
+    color: #1a1d26
+    font-weight:900;
+}
+
+a{
+    display: contents;
+}
+
+/*animations*/
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        z-index: 0;
+        display: none;
+    }
+    to {
+        opacity: 1;
+        z-index: 0;
+        display: block;
+    }
+}
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        z-index: 0;
+        display: block;
+    }
+    99% {
+        opacity: 0;
+        z-index: 0;
+    }
+    100% {
+        opacity: 0;
+        z-index: -1;
+        display: none;
+    }
+}
+
+@keyframes fade-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(-30px) scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+@keyframes scale-fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+
+/*map*/
+
+.map-select{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: none;
+}
+.map-name{
+    transition: border-color 0.2s;
+    transition-timing-function: ease;
+    background-color: #2c313c;
+    padding: 3%;
+    margin-right: 1%;
+    user-select: none;
+    cursor: pointer;
+    animation-name: scale-fade-in-up;
+    animation-duration: 0.5s;
+}
+.map-name-select{
+    border-bottom: 2px var(--main-color) solid;
+}
+#map{
+    border: 4px #ffffff29 solid;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+.swal2-input{
+    color: #2D2D2D;
+}
+
+#color-picker{
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background-color: #f4ac5f;
+    border-style: solid;
+    border-width: 8px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-color: #2c313c;
+    cursor: pointer;
+}
+
+
+/*chackbox*/
+
+.check-container {
+    padding: 2%;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 2%;
+}
+
+/* Hide the browser's default checkbox */
+.check-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    transition: border-color 0.2s, background-color 0.2s;
+    transition-timing-function:ease;
+    position: absolute;
+    height: 25px;
+    left: 0%;
+    width: 25px;
+    background-color: #2c313c;
+    border: 2px #1a1d26 solid;
+}
+
+/* On mouse-over, add a grey background color */
+.check-container:hover input ~ .checkmark {
+    border-color: var(--main-color);
+}
+
+/* When the checkbox is checked, add a blue background */
+.check-container input:checked ~ .checkmark {
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.check-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #2c313c;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
