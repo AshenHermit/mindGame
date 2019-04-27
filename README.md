@@ -28,4 +28,4 @@ To connect to the server, simply enter in the address bar of the browser: `[IPv4
 For example: `10.10.101.10:3000`
 
 ## A little about the process
-In the team of players there is the first person entered the game - god, who has a preliminary plot followed by players. He is able to change all the parameters / profile of players, draw cards, and command the process of the game.
+In the team of players there is the first person entered the game - god, who has a preliminary plot followed by players. He is able to change all the parameters / profile of players, draw maps, and command the process of the game.
