@@ -1,7 +1,7 @@
 # MindGame
 Multiplayer node.js application game for creating adventure stories in real time in the style of text RPG
 
-## Installation
+## Setup
 After downloading, you need to install using **npm** *socket.io* and *express* libraries, which appear in the *node_modules* folder
 
 ## Using
