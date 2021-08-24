@@ -29,3 +29,6 @@ For example: `10.10.101.10:3000`
 
 ## A little about the process
 In the team of players there is the first person entered the game - god, who has a preliminary plot followed by players. He is able to change all the parameters / profile of players, draw maps, and command the process of the game.
+
+
+![screenshot](https://pp.userapi.com/c856036/v856036010/2d948/q9-R874F8kk.jpg)
